@@ -16,7 +16,7 @@ export const ImageComponent = ({textColor, title, buttons, urlImage, urlLogo, pe
                         {buttons && buttons.length > 0  
                         ? <div className="wrapper-buttons">
                             {buttons.map(button => 
-                                <div className="text-button">
+                                <div key={button.text} className="text-button">
                                     {button.text}
                                 </div>
                             )} 

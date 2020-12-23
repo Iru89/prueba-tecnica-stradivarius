@@ -15,7 +15,7 @@ const VideoComponent = ({urlPoster, urlSource, buttons, title, textColor}) => {
                         {buttons && buttons.length > 0  
                         ? <div className="wrapper-buttons">
                             {buttons.map(button => 
-                                <div className="text-button">
+                                <div key={button.text} className="text-button">
                                     {button.text}
                                 </div>
                             )} 
