@@ -1,15 +1,19 @@
 import React, {Suspense, useState, lazy} from "react";
-import { fetchAPIGet } from "../../utils/core";
+import { fetchAPIGet, fetchFAKE } from "../../utils/core";
+import AnimationText from "./AnimationText";
 
 export const Main = () => {
     const [text, setText] = useState("");
+    const [modules, setModules] = useState(null);
 
     React.useEffect(() => {
         const fetchText = async () => {
             const textAPI = await fetchAPIGet("https://baconipsum.com/api/?type=all-meat&paras=2&start-with-lorem=1", { method: "GET" });
             setText(textAPI);
-        }
+        };
         fetchText();
+        const data = fetchFAKE();
+        setModules( data.modules );
     },[]);
 
     const LazyImagesCarousel = lazy(() => import('./ImagesCarousel'));
@@ -17,91 +21,87 @@ export const Main = () => {
     const LazyVideoComponent = lazy(() => import('./VideoComponent'));
     const LazyGrid = lazy(() => import('./Grid'));
 
+    console.log(modules);
     return (
         <>
-            <Suspense fallback={<div>Loading...</div>}>
-                {text && text.data && text.data.length > 0  ? <LazyImagesCarousel text={text.data[0]} /> : null}
-            </Suspense>
-            <Suspense fallback={<div>Loading...</div>}>
-                {text && text.data && text.data.length > 1  
-                    ? <LasyImageComponent 
-                        textColor="white" 
-                        text={text.data[1]} 
-                        title="ABRIGOS" 
-                        buttons={[{text: "Ver todo", url: ""}]} 
-                        urlImage="https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/mkt-w/1920/2400_abrigos.jpg?t=20201222025002"
-                    /> 
-                    : null }
-            </Suspense>
-            <Suspense fallback={<div>Loading...</div>}>
-                <LasyImageComponent 
-                    textColor="white" 
-                    buttons={[{text: "Ver todo", url: ""}]} 
-                    urlImage="https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/mkt-w/1920/2400_str.jpg?t=20201223023502" 
-                    urlLogo="https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/logo_str.svg?t=20201223023502"
-                />
-            </Suspense>
-            <Suspense fallback={<div>Loading...</div>}>
-                <LasyImageComponent 
-                    textColor="white" 
-                    title="EFFORTLESSLY COOL"
-                    buttons={[{text: "PUNTO", url: ""}, {text: "JEANS", url: ""}]} 
-                    urlImage="https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/mkt-w/1920/2400_punto_jeans.jpg?t=20201223023502"
-                />
-            </Suspense>
-            <div className="grid-2-col">
-            <Suspense fallback={<div>Loading...</div>}>
-                <LasyImageComponent 
-                    textColor="white" 
-                    title="ZAPATOS"
-                    buttons={[{text: "VER TODO", url: ""}]} 
-                    urlImage="https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/mkt-w/1920/2400_zapatos.jpg?t=20201223023502"
-                />
-                <LasyImageComponent 
-                    textColor="white" 
-                    title="ACCESORIOS"
-                    buttons={[{text: "VER TODO", url: ""}]} 
-                    urlImage="https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/mkt-w/1920/2400_accesorios.jpg?t=20201223023502"
-                />
-            </Suspense>
-            </div>
-            <Suspense fallback={<div>Loading...</div>}>
-                <LazyVideoComponent 
-                    urlPoster={"https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/mkt-w/1920/2400_holiday_fallback.jpg?t=20201223023502"}
-                    urlSource={"https://static.e-stradivarius.net/5/static2/homes/2020_w51/video/2400_holiday.mp4?t=20201223023502"}
-                    title="The holiday issue"
-                    textColor="white"
-                    buttons={[{text:"VER EDITORIAL", url: ""}, {text:"GIFT GUIDE", url: ""}]}
-                />
-            </Suspense>
-            <Suspense fallback={<div>Loading...</div>}>
-                <LazyVideoComponent 
-                    urlPoster={"https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/mkt-w/1920/Stradishoppers/2400_logo_fallback.jpg?t=20201223023502"}
-                    urlSource={"https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/Stradishoppers/1200_stradishoppers_logo.mp4?t=20201223023502"}/>
-            </Suspense>
-            <div className="grid-2-col">
+            {modules ?
+                <>
+                <Suspense fallback={<div>Loading...</div>}>
+                    {text && text.data && text.data.length > 0  ? <LazyImagesCarousel text={text.data[0]} items={modules[0].items}/> : null}
+                </Suspense>
+                <Suspense fallback={<div>Loading...</div>}>
+                    {text && text.data && text.data.length > 1  
+                        ? <LasyImageComponent 
+                            textColor={modules[1].textColor}
+                            title={modules[1].title}
+                            buttons={modules[1].buttons}
+                            urlImage={modules[1].urlImage}
+                        /> 
+                        : null }
+                </Suspense>
+                <Suspense fallback={<div>Loading...</div>}>
+                    <LasyImageComponent 
+                        textColor={modules[3].textColor}
+                        title={modules[3].title}
+                        buttons={modules[3].buttons}
+                        urlImage={modules[3].urlImage}
+                    />
+                </Suspense>
+                <div className="grid-2-col">
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <LasyImageComponent 
+                            textColor={modules[4].items[0].textColor}
+                            title={modules[4].items[0].title}
+                            buttons={modules[4].items[0].buttons}
+                            urlImage={modules[4].items[0].urlImage}
+                        />
+                        <LasyImageComponent 
+                            textColor={modules[4].items[1].textColor}
+                            title={modules[4].items[1].title}
+                            buttons={modules[4].items[1].buttons}
+                            urlImage={modules[4].items[1].urlImage}
+                        />
+                    </Suspense>
+                </div>
+                <Suspense fallback={<div>Loading...</div>}>
+                    <LasyImageComponent 
+                        textColor={modules[2].textColor}
+                        buttons={modules[2].buttons}
+                        urlImage={modules[2].urlImage}
+                        urlLogo={modules[2].urlLogo}
+                    />
+                </Suspense>
                 <Suspense fallback={<div>Loading...</div>}>
                     <LazyVideoComponent 
-                        urlPoster={"https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/mkt-w/1920/2400_stradishoppers_fallback.jpg?t=20201222025002"}
-                        urlSource={"https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/Stradishoppers/2400_stradishoppers_ES.mp4?t=20201222025002"}/>
+                        urlPoster={modules[5].urlPoster}
+                        urlSource={modules[5].urlSource}
+                        title={modules[5].title}
+                        textColor={modules[5].textColor}
+                        buttons={modules[5].buttons}
+                    />
                 </Suspense>
                 <Suspense fallback={<div>Loading...</div>}>
-                        <LazyGrid 
-                            items={
-                                [{
-                                    urlImg:  "https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/mkt-w/1920/Stradishoppers/2400_stradishoppers_2.jpg?t=20201223023502", 
-                                    text: "DESCUBRE NUESTROS NUEVOS VÍDEOS COMPRABLES", 
-                                    links: [{text: "IR AL CANAL", url: "" }]
-                                },
-                                {
-                                    urlImg: "https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/mkt-w/1920/Stradishoppers/2400_stradishoppers_3.jpg?t=20201223023502", 
-                                    text: "NO TE PIERDAS LAS ACTUALIZACIONES SEMANALES EN STREAMING DE NUESTRAS STRADISHOPPERS. VE I COMPRA ONLINE LO MÁS NUEVO DE NUESTRA TIENDA", 
-                                    links: [{text: "@ANDREASTRADISHOPPER", url: "" }, {text: "@ANASTRADISHOPPER", url: "" }]
-                                }]
-                            }
-                        />
+                    <LazyVideoComponent 
+                        urlPoster={modules[6].urlPoster}
+                        urlSource={modules[6].urlSource}
+                    />
                 </Suspense>
-            </div>
+                <div className="grid-2-col">
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <LazyVideoComponent 
+                            urlPoster={modules[7].urlPoster}
+                            urlSource={modules[7].urlSource}
+                        />
+                    </Suspense>
+                    <Suspense fallback={<div>Loading...</div>}>
+                            <LazyGrid 
+                                items={modules[8].items}
+                            />
+                    </Suspense>
+                </div>
+                {text.data && text.data.length > 1 ? <AnimationText text={text.data[1]} /> : null }
+            </> 
+            : null}
         </>
     );
 };

@@ -28,7 +28,7 @@ const ImagesCarousel = ({children}) => {
 
 // export default ImagesCarousel;
 
-const LazyImagesCarousel = ({text}) => {
+const LazyImagesCarousel = ({text, items}) => {
     const [show, setShow] = React.useState(false);
 
     const elementRef = React.useRef();
@@ -51,8 +51,20 @@ const LazyImagesCarousel = ({text}) => {
         <div ref={elementRef} className="lazy-carousel">
             {show ? <>
                 <ImagesCarousel >
-                    <ImageComponent textColor="red" title="COLECCIÓN FIESTA" percentatge={true} buttons={[{text: "COMPRAR", url: ""}]} urlImage="https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/mkt-w/1920/2400_fiesta.jpg?t=20201222025002"/>
-                    <ImageComponent textColor="white" title="NEW IN" buttons={[{text: "Ver todo", url: ""}]} urlImage="https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/mkt-w/1920/2400_newin.jpg?t=20201222025002"/>
+                    <ImageComponent 
+                        textColor={items[0].textColor} 
+                        title={items[0].title} 
+                        percentatge={items[0].percentatge && items[0].percentatge.lenght > 0 ? true : false} 
+                        buttons={items[0].buttons} 
+                        urlImage={items[0].urlImage} 
+                    />
+                    <ImageComponent 
+                        textColor={items[1].textColor} 
+                        title={items[1].title}
+                        percentatge={items[1].percentatge && items[1].percentatge.lenght > 0 ? true : false}  
+                        buttons={items[1].buttons} 
+                        urlImage={items[1].urlImage} 
+                    />
                 </ImagesCarousel>
                 <AnimationText text={text} />
             </>

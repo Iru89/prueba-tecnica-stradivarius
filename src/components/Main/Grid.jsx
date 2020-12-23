@@ -1,5 +1,6 @@
 import * as React from "react";
 
+
 const Grid = ({items}) => {
     return (
         <div className="grid2x2">
@@ -50,7 +51,8 @@ const LazyGrid = ({items}) => {
     
     return (
         <div ref={elementRef}>
-            {show ? <>
+            {show 
+            ? <>
                 <Grid items={items} />
             </>
             : null}
