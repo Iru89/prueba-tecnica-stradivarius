@@ -21,7 +21,6 @@ export const Main = () => {
     const LazyVideoComponent = lazy(() => import('./VideoComponent'));
     const LazyGrid = lazy(() => import('./Grid'));
 
-    console.log(modules);
     return (
         <>
             {modules ?

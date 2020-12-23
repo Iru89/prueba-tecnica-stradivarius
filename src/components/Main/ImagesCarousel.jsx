@@ -46,7 +46,6 @@ const LazyImagesCarousel = ({text, items}) => {
 
         return () => observer.disconnect();
     });
-    console.log(items[0].percentatge && items[0].percentatge.lenght > 0 ? true : false)
 
     return (
         <div ref={elementRef} className="lazy-carousel">
