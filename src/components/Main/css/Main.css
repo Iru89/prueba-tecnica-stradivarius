@@ -172,6 +172,11 @@
     cursor: pointer;
     font-size: 18px;
 }
+@media (max-width: 769px) {
+    .card-link {
+        font-size: 2.3vw;
+    }
+}
 
 .card-link:hover {
     text-decoration: underline;
