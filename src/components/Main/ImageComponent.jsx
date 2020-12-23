@@ -1,35 +1,38 @@
 import * as React from "react";
+import AnimationText from "./AnimationText";
 import "./css/Main.css";
 
-const ImageComponent = ({text, urlImage}) => {
-    console.log("text", text);
-
+export const ImageComponent = ({textColor, title, buttons, urlImage, urlLogo, percentatge}) => {
     return (
         <>
             <div className="position-relative">
                 <div className="position">
-                    <div className="wrapper font-white">
-                        <div>ABRIGOS</div>
-                        <div>VER TODO</div>            
+                    <div className={`wrapper font-${textColor}`}>
+                        <div className="title">
+                            {title ? title : null }
+                        </div>
+                        {urlLogo ? <div className="image-logo"> <img src={urlLogo} alt="" /></div> : null}
+                        {percentatge ? <div  className="title">-<span></span></div> : null}
+                        {buttons && buttons.length > 0  
+                        ? <div className="wrapper-buttons">
+                            {buttons.map(button => 
+                                <div className="text-button">
+                                    {button.text}
+                                </div>
+                            )} 
+                        </div> 
+                        : null}          
                     </div>
                 </div>
                 <img src={urlImage} alt="" className="image"/>
             </div>
-            {text.data && text.data.length > 1 ?
-                <div className="animation-wrapper">
-                    <p className="animation-text">
-                        {text.data[1]}
-                        {/* ENVÍO A DOMICILIO GRATUITO */}
-                    </p>
-                </div> 
-            : null }
         </>
     );
 };
 
 // export default ImageComponent;
 
-const LazyImageComponent = ({text, urlImage}) => {
+const LazyImageComponent = ({textColor, text, title, buttons, urlImage, urlLogo}) => {
     const [show, setShow] = React.useState(false);
 
     const elementRef = React.useRef();
@@ -50,7 +53,12 @@ const LazyImageComponent = ({text, urlImage}) => {
     
     return (
         <div ref={elementRef} className="lazy-carousel">
-            {show ? <ImageComponent text={text} urlImage={urlImage}/> : null}
+            {show ? 
+                <>
+                    <ImageComponent textColor={textColor} title={title} buttons={buttons} urlImage={urlImage} urlLogo={urlLogo}/>
+                    {text ? <AnimationText text={text} /> : null }
+                </>
+            : null}
         </div>
     );
 }
