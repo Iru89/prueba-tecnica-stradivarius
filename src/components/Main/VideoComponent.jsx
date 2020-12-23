@@ -16,7 +16,7 @@ const VideoComponent = ({urlPoster, urlSource, buttons, title, textColor}) => {
                         ? <div className="wrapper-buttons">
                             {buttons.map(button => 
                                 <div key={button.text} className="text-button">
-                                    {button.text}
+                                    <a href={button.url} target="_blank" rel="noopener noreferrer">{button.text}</a>
                                 </div>
                             )} 
                         </div> 
