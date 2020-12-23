@@ -27,7 +27,9 @@ export const Main = () => {
             {modules ?
                 <>
                 <Suspense fallback={<div>Loading...</div>}>
-                    {text && text.data && text.data.length > 0  ? <LazyImagesCarousel text={text.data[0]} items={modules[0].items}/> : null}
+                    {text && text.data && text.data.length > 0  
+                        ? <LazyImagesCarousel text={text.data[0]} items={modules[0].items}/> 
+                        : null}
                 </Suspense>
                 <Suspense fallback={<div>Loading...</div>}>
                     {text && text.data && text.data.length > 1  
@@ -99,7 +101,9 @@ export const Main = () => {
                             />
                     </Suspense>
                 </div>
-                {text.data && text.data.length > 1 ? <AnimationText text={text.data[1]} /> : null }
+                {text.data && text.data.length > 1 
+                    ? <AnimationText text={text.data[1]} /> 
+                    : null }
             </> 
             : null}
         </>
