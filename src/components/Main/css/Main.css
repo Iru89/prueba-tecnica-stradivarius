@@ -173,3 +173,6 @@
     font-size: 18px;
 }
 
+.card-link:hover {
+    text-decoration: underline;
+}
