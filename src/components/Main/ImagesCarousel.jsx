@@ -46,7 +46,8 @@ const LazyImagesCarousel = ({text, items}) => {
 
         return () => observer.disconnect();
     });
-    
+    console.log(items[0].percentatge && items[0].percentatge.lenght > 0 ? true : false)
+
     return (
         <div ref={elementRef} className="lazy-carousel">
             {show ? <>
@@ -54,14 +55,14 @@ const LazyImagesCarousel = ({text, items}) => {
                     <ImageComponent 
                         textColor={items[0].textColor} 
                         title={items[0].title} 
-                        percentatge={items[0].percentatge && items[0].percentatge.lenght > 0 ? true : false} 
+                        percentatge={items[0].percentatge && items[0].percentatge.length > 0 ? true : false} 
                         buttons={items[0].buttons} 
                         urlImage={items[0].urlImage} 
                     />
                     <ImageComponent 
                         textColor={items[1].textColor} 
                         title={items[1].title}
-                        percentatge={items[1].percentatge && items[1].percentatge.lenght > 0 ? true : false}  
+                        percentatge={items[1].percentatge && items[1].percentatge.length > 0 ? true : false}  
                         buttons={items[1].buttons} 
                         urlImage={items[1].urlImage} 
                     />
