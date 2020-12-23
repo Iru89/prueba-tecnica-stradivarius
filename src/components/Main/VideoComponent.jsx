@@ -1,16 +1,40 @@
 import * as React from "react";
 import "./css/Main.css";
 
-const VideoComponent = () => {
+const VideoComponent = ({urlPoster, urlSource, buttons, title, textColor}) => {
 
     return (
-            <video playsInline muted loop autoPlay className="video" id="" poster="https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/mkt-w/1920/2400_stradishoppers_fallback.jpg?t=20201222025002">
-                <source src="https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/Stradishoppers/2400_stradishoppers_ES.mp4?t=20201222025002" type="video/mp4"/>
-            </video>
+        <>
+            {title 
+            ? <div className="position-relative">
+                <div className="position">
+                    <div className={textColor ? `wrapper font-${textColor}` : "wrapper"}>
+                        <div className="video-title">
+                            {title ? title : null }
+                        </div>
+                        {buttons && buttons.length > 0  
+                        ? <div className="wrapper-buttons">
+                            {buttons.map(button => 
+                                <div className="text-button">
+                                    {button.text}
+                                </div>
+                            )} 
+                        </div> 
+                        : null}           
+                    </div>
+                </div>
+                <video playsInline muted loop autoPlay className="video" id="" poster={urlPoster}>
+                    <source src={urlSource} type="video/mp4"/>
+                </video>
+            </div> 
+            : <video playsInline muted loop autoPlay className="video" id="" poster={urlPoster}>
+                <source src={urlSource} type="video/mp4"/>
+            </video> }
+        </> 
     );
 };
 
-const LazyVideoComponent = () => {
+const LazyVideoComponent = ({urlPoster, urlSource, buttons, title, textColor}) => {
     const [show, setShow] = React.useState(false);
 
     const elementRef = React.useRef();
@@ -31,7 +55,7 @@ const LazyVideoComponent = () => {
     
     return (
         <div ref={elementRef}>
-            {show ? <VideoComponent /> : null}
+            {show ? <VideoComponent urlPoster={urlPoster} urlSource={urlSource} buttons={buttons} title={title} textColor={textColor}/> : null}
         </div>
     );
 }
