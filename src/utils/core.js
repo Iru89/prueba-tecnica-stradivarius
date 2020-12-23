@@ -7,6 +7,8 @@ export const fetchAPIGet = async (url, config) => {
     return data;
 };
 
+// La funcion fetchFAKE representa una llamada a una API REST con un metodo GET
+// que devuelve toda la información necesaria  para la home
 export const fetchFAKE = () => {
     const json = {
         modules: [
