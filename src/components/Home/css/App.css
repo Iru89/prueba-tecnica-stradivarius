@@ -1,0 +1,17 @@
+.App {
+  display: flex;
+  flex-direction: column;
+}
+
+.App-header {
+  background-color: whitesmoke;
+  flex-basis: 10%;
+  flex-shrink: 0;
+  min-height: 10vh;
+}
+
+.App-main {
+  flex-basis: 90%;
+  flex-grow: 1;
+  min-height: 90vh;
+}
