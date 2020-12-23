@@ -16,7 +16,7 @@ const VideoComponent = ({urlPoster, urlSource, buttons, title, textColor}) => {
                         {buttons && buttons.length > 0  
                         ? <div className="wrapper-buttons">
                             {buttons.map(button => 
-                                <div key={button.text} className="text-button">
+                                <div key={button.text} className="video-button">
                                     <a href={button.url} target="_blank" rel="noopener noreferrer">{button.text}</a>
                                 </div>
                             )} 
@@ -24,7 +24,7 @@ const VideoComponent = ({urlPoster, urlSource, buttons, title, textColor}) => {
                         : null}           
                     </div>
                 </div>
-                <video playsInline muted loop autoPlay className="video" id="" poster={urlPoster}>
+                <video playsInline muted loop autoPlay className="video-with-text" id="" poster={urlPoster}>
                     <source src={urlSource} type="video/mp4"/>
                 </video>
             </div> 

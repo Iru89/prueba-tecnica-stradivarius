@@ -36,7 +36,7 @@ const LazyImageComponent = ({textColor, text, title, buttons, urlImage, urlLogo}
     const { isNearScreen, fromRef } = useNearScreen();
     
     return (
-        <div ref={fromRef} className="lazy-carousel">
+        <div ref={fromRef}>
             {isNearScreen ? 
                 <>
                     <ImageComponent textColor={textColor} title={title} buttons={buttons} urlImage={urlImage} urlLogo={urlLogo}/>
