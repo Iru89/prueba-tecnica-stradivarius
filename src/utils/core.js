@@ -1,3 +1,5 @@
+import * as React from "react";
+
 export const fetchAPIGet = async (url, config) => {
     const response = await fetch(url, config);
     const json = await response.json();
@@ -193,4 +195,27 @@ export const fetchFAKE = () => {
     };
 
     return json;
+};
+
+export const useNearScreen = () => {
+    const [isNearScreen, setIsNearScreen] = React.useState(false);
+    const fromRef = React.useRef();
+
+    React.useEffect(() => {
+        const onChange = (entries, observer) => {
+            const element = entries[0];
+            if (element.isIntersecting) {
+                setIsNearScreen(true);
+                observer.disconnect();
+            }
+        };
+        const observer = new IntersectionObserver(onChange, {
+            rootMargin: "100px"
+        });
+        observer.observe(fromRef.current);
+
+        return () => observer.disconnect();
+    });
+
+    return { isNearScreen, fromRef };
 };

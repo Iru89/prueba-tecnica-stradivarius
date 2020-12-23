@@ -1,5 +1,6 @@
 import * as React from "react";
-
+import { useNearScreen } from "../../utils/core";
+import "./css/Main.css";
 
 const Grid = ({items}) => {
     return (
@@ -28,30 +29,13 @@ const Grid = ({items}) => {
     );
 };
 
-// export default Grid;
-
 const LazyGrid = ({items}) => {
-    const [show, setShow] = React.useState(false);
-
-    const elementRef = React.useRef();
-
-    React.useEffect(() => {
-        const onChange = (entries, observer) => {
-            const element = entries[0];
-            if(element.isIntersecting){
-                setShow(true);
-                observer.disconnect();
-            }
-        };
-        const observer = new IntersectionObserver(onChange, { rootMargin: "100px" });
-        observer.observe(elementRef.current);
-
-        return () => observer.disconnect();
-    });
     
+    const { isNearScreen, fromRef } = useNearScreen();
+
     return (
-        <div ref={elementRef}>
-            {show 
+        <div ref={fromRef}>
+            {isNearScreen 
             ? <>
                 <Grid items={items} />
             </>

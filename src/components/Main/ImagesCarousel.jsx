@@ -3,6 +3,7 @@ import Carousel from 'nuka-carousel';
 import "./css/Main.css";
 import AnimationText from "./AnimationText";
 import {ImageComponent} from "./ImageComponent";
+import { useNearScreen } from "../../utils/core";
 
 
 const ImagesCarousel = ({children}) => {
@@ -26,30 +27,13 @@ const ImagesCarousel = ({children}) => {
     );
 };
 
-// export default ImagesCarousel;
-
 const LazyImagesCarousel = ({text, items}) => {
-    const [show, setShow] = React.useState(false);
-
-    const elementRef = React.useRef();
-
-    React.useEffect(() => {
-        const onChange = (entries, observer) => {
-            const element = entries[0];
-            if(element.isIntersecting){
-                setShow(true);
-                observer.disconnect();
-            }
-        };
-        const observer = new IntersectionObserver(onChange, { rootMargin: "100px" });
-        observer.observe(elementRef.current);
-
-        return () => observer.disconnect();
-    });
+    
+    const { isNearScreen, fromRef } = useNearScreen();
 
     return (
-        <div ref={elementRef} className="lazy-carousel">
-            {show ? <>
+        <div ref={fromRef} className="lazy-carousel">
+            {isNearScreen ? <>
                 <ImagesCarousel >
                     <ImageComponent 
                         textColor={items[0].textColor} 

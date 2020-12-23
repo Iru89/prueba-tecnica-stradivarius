@@ -1,5 +1,6 @@
 import * as React from "react";
 import AnimationText from "./AnimationText";
+import { useNearScreen } from "../../utils/core";
 import "./css/Main.css";
 
 export const ImageComponent = ({textColor, title, buttons, urlImage, urlLogo, percentatge}) => {
@@ -30,30 +31,13 @@ export const ImageComponent = ({textColor, title, buttons, urlImage, urlLogo, pe
     );
 };
 
-// export default ImageComponent;
-
 const LazyImageComponent = ({textColor, text, title, buttons, urlImage, urlLogo}) => {
-    const [show, setShow] = React.useState(false);
-
-    const elementRef = React.useRef();
-
-    React.useEffect(() => {
-        const onChange = (entries, observer) => {
-            const element = entries[0];
-            if(element.isIntersecting){
-                setShow(true);
-                observer.disconnect();
-            }
-        };
-        const observer = new IntersectionObserver(onChange, { rootMargin: "100px" });
-        observer.observe(elementRef.current);
-
-        return () => observer.disconnect();
-    });
+    
+    const { isNearScreen, fromRef } = useNearScreen();
     
     return (
-        <div ref={elementRef} className="lazy-carousel">
-            {show ? 
+        <div ref={fromRef} className="lazy-carousel">
+            {isNearScreen ? 
                 <>
                     <ImageComponent textColor={textColor} title={title} buttons={buttons} urlImage={urlImage} urlLogo={urlLogo}/>
                     {text ? <AnimationText text={text} /> : null }
