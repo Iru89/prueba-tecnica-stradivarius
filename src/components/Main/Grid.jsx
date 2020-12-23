@@ -1,27 +1,61 @@
 import * as React from "react";
 
-const Grid = () => {
+const Grid = ({items}) => {
     return (
         <div className="grid2x2">
             <div>
-                <img src="https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/mkt-w/1920/Stradishoppers/2400_stradishoppers_2.jpg?t=20201223023502" alt=""/>
+                <img src={items[0].urlImg} alt=""/>
             </div>
             <div className="card">
-                <div>DESCUBRE NUESTROS NUEVOS VÍDEOS COMPRABLES</div>
-                <div>IR AL CANAL</div>
+                <div className="card-text">{items[0].text}</div>
+                {items[0] && items[0].links && items[0].links.length > 0 
+                    ? items[0].links.map(link => <div className="card-link">{link.text}</div>) 
+                    : null }
             </div>
             <div  className="card">
-                <div>NO TE PIERDAS LAS ACTUALIZACIONES SEMANALES EN STREAMING DE NUESTRAS STRADISHOPPERS. VE I COMPRA ONLINE LO MÁS NUEVO DE NUESTRA TIENDA</div>
+                <div className="card-text">{items[1].text}</div>
                 <div>
-                    <div>@ANDREASTRADISHOPPER</div>
-                    <div>@ANASTRADISHOPPER</div>
+                {items[1] && items[1].links && items[1].links.length > 1 
+                    ? items[1].links.map(link => <div key={link.text} className="card-link">{link.text}</div>) 
+                    : null }
                 </div>
             </div>
             <div>
-                <img src="https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/mkt-w/1920/Stradishoppers/2400_stradishoppers_3.jpg?t=20201223023502" alt=""/>
+                <img src={items[1].urlImg} alt=""/>
             </div>
         </div>
     );
 };
 
-export default Grid;
+// export default Grid;
+
+const LazyGrid = ({items}) => {
+    const [show, setShow] = React.useState(false);
+
+    const elementRef = React.useRef();
+
+    React.useEffect(() => {
+        const onChange = (entries, observer) => {
+            const element = entries[0];
+            if(element.isIntersecting){
+                setShow(true);
+                observer.disconnect();
+            }
+        };
+        const observer = new IntersectionObserver(onChange, { rootMargin: "100px" });
+        observer.observe(elementRef.current);
+
+        return () => observer.disconnect();
+    });
+    
+    return (
+        <div ref={elementRef}>
+            {show ? <>
+                <Grid items={items} />
+            </>
+            : null}
+        </div>
+    );
+}
+
+export default LazyGrid;
