@@ -7,7 +7,6 @@ const AnimationText = ({text}) => {
                 <div className="animation-wrapper">
                     <p className="animation-text">
                         {text}
-                        {/* ENVÍO A DOMICILIO GRATUITO */}
                     </p>
                 </div> 
             : null }
