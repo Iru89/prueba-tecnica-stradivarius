@@ -33,14 +33,7 @@
 .title span::before {
     content: "30%";
     animation: percentage 3s linear infinite;
-
-    /* -moz-animation: percentatge 3s linear infinite; */
-    /* -moz-animation-name: percentatge;
-    -moz-animation-duration: 3s;
-    -moz-animation-timing-function: linear;
-    -moz-animation-iteration-count: infinite; */
 }
-
 @keyframes percentage {
     0% {
         content: "30%";
@@ -63,19 +56,7 @@
     100% {
         content: "50%";
     }
-}
-
-@-moz-keyframes percentage{
-    0% {
-        content: "30%";
-    }
-    50% {
-        content: "40%";
-    }
-    100% {
-        content: "50%";
-    }
-} */
+}*/
 
 .text-button {
     cursor: pointer;
@@ -115,17 +96,11 @@
     animation-timing-function: linear;
     animation-iteration-count: infinite; */
 
-    -webkit-animation: slidetext 10s linear infinite;
+    /* -webkit-animation: slidetext 10s linear infinite; */
     /* -webkit-animation-name: slidetext; 
     -webkit-animation-duration: 10s; 
     -webkit-animation-timing-function: linear;
     -webkit-animation-iteration-count: infinite; */
-
-    /* -moz-animation: slidetext 10s linear 0.1s infinite; */
-    /* -moz-animation-name: slidetext;
-    -moz-animation-duration: 10s;
-    -moz-animation-timing-function: linear;
-    -moz-animation-iteration-count: infinite; */
 }
 
 @keyframes slidetext {
@@ -136,30 +111,18 @@
     to {
         position: relative;
         left: -100%
+    } 
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    @keyframes slidetext {
+        from {
+            transform: translateX(3000px);
+        }
+        to {
+            transform: translateX(-3000px);
+        }
     }
 }
-
-@-webkit-keyframes slidetext {
-    0% {
-        position: relative;
-        left: 100%;
-    }
-    100% {
-        position: relative;
-        left: -100%
-    }
-}
-
-/* @-moz-keyframes slidetext {
-    1% {
-        position: relative;
-        left: 100%;
-    }
-    100% {
-        position: relative;
-        left: -100%
-    }
-} */
 
 .video {
     width: 100%;
