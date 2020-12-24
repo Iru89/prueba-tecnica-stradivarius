@@ -32,7 +32,7 @@ const LazyImagesCarousel = ({text, items}) => {
     const { isNearScreen, fromRef } = useNearScreen();
 
     return (
-        <div ref={fromRef} className="lazy-carousel">
+        <div ref={fromRef} className="lazy">
             {isNearScreen ? <>
                 <ImagesCarousel >
                     <ImageComponent 

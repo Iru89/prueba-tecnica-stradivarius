@@ -40,7 +40,7 @@ const LazyVideoComponent = ({urlPoster, urlSource, buttons, title, textColor}) =
     const { isNearScreen, fromRef } = useNearScreen();
     
     return (
-        <div ref={fromRef}>
+        <div ref={fromRef} className="lazy-video">
             {isNearScreen ? <VideoComponent urlPoster={urlPoster} urlSource={urlSource} buttons={buttons} title={title} textColor={textColor}/> : null}
         </div>
     );

@@ -162,8 +162,12 @@
     justify-content: space-evenly;
 }
 
-.lazy-carousel {
+.lazy {
     min-height: 100vh;
+}
+
+.lazy-video {
+    min-height: 200px;
 }
 
 .dots-carousel {
