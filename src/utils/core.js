@@ -59,21 +59,6 @@ export const fetchFAKE = () => {
                     "https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/mkt-w/1920/2400_abrigos.jpg?t=20201222025002"
             },
             {
-                type: "image-2",
-                textColor: "white",
-                buttons: [
-                    {
-                        text: "Ver todo",
-                        url:
-                            "https://www.stradivarius.com/es/mujer/ropa/compra-por-producto/str-c1020210502.html"
-                    }
-                ],
-                urlImage:
-                    "https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/mkt-w/1920/2400_str.jpg?t=20201223023502",
-                urlLogo:
-                    "https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/logo_str.svg?t=20201223023502"
-            },
-            {
                 type: "image-3",
                 textColor: "white",
                 title: "EFFORTLESSLY COOL",
@@ -124,6 +109,21 @@ export const fetchFAKE = () => {
                 ]
             },
             {
+                type: "image-2",
+                textColor: "white",
+                buttons: [
+                    {
+                        text: "Ver todo",
+                        url:
+                            "https://www.stradivarius.com/es/mujer/ropa/compra-por-producto/str-c1020210502.html"
+                    }
+                ],
+                urlImage:
+                    "https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/mkt-w/1920/2400_str.jpg?t=20201223023502",
+                urlLogo:
+                    "https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/logo_str.svg?t=20201223023502"
+            },
+            {
                 type: "video-1",
                 urlPoster:
                     "https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/mkt-w/1920/2400_holiday_fallback.jpg?t=20201223023502",
@@ -152,14 +152,13 @@ export const fetchFAKE = () => {
                     "https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/Stradishoppers/1200_stradishoppers_logo.mp4?t=20201223023502"
             },
             {
-                type: "video-in-grid-2-col-B",
-                urlPoster:
-                    "https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/mkt-w/1920/2400_stradishoppers_fallback.jpg?t=20201222025002",
-                urlSource:
-                    "https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/Stradishoppers/2400_stradishoppers_ES.mp4?t=20201222025002"
-            },
-            {
                 type: "stradishoppers-in-grid-2-col-B",
+                video: {
+                    urlPoster:
+                        "https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/mkt-w/1920/2400_stradishoppers_fallback.jpg?t=20201222025002",
+                    urlSource:
+                        "https://static.e-stradivarius.net/5/static2/homes/2020_w51/img/Stradishoppers/2400_stradishoppers_ES.mp4?t=20201222025002"
+                },
                 items: [
                     {
                         urlImg:

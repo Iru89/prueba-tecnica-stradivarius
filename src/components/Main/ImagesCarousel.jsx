@@ -35,7 +35,14 @@ const LazyImagesCarousel = ({text, items}) => {
         <div ref={fromRef} className="lazy">
             {isNearScreen ? <>
                 <ImagesCarousel >
-                    <ImageComponent 
+                    {items.map(item => <ImageComponent 
+                        textColor={item.textColor} 
+                        title={item.title} 
+                        percentatge={item.percentatge && items[0].percentatge.length > 0 ? true : false} 
+                        buttons={item.buttons} 
+                        urlImage={item.urlImage} 
+                    />)}
+                    {/* <ImageComponent 
                         textColor={items[0].textColor} 
                         title={items[0].title} 
                         percentatge={items[0].percentatge && items[0].percentatge.length > 0 ? true : false} 
@@ -48,7 +55,7 @@ const LazyImagesCarousel = ({text, items}) => {
                         percentatge={items[1].percentatge && items[1].percentatge.length > 0 ? true : false}  
                         buttons={items[1].buttons} 
                         urlImage={items[1].urlImage} 
-                    />
+                    /> */}
                 </ImagesCarousel>
                 <AnimationText text={text} />
             </>

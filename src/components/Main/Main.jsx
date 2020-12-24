@@ -23,88 +23,118 @@ export const Main = () => {
 
     return (
         <>
-            {modules ?
-                <>
-                <Suspense fallback={<div>Loading...</div>}>
-                    {text && text.data && text.data.length > 0  
-                        ? <LazyImagesCarousel text={text.data[0]} items={modules[0].items}/> 
-                        : null}
-                </Suspense>
-                <Suspense fallback={<div>Loading...</div>}>
-                    {text && text.data && text.data.length > 1  
-                        ? <LasyImageComponent 
-                            textColor={modules[1].textColor}
-                            title={modules[1].title}
-                            buttons={modules[1].buttons}
-                            urlImage={modules[1].urlImage}
-                        /> 
-                        : null }
-                </Suspense>
-                <Suspense fallback={<div>Loading...</div>}>
-                    <LasyImageComponent 
-                        textColor={modules[3].textColor}
-                        title={modules[3].title}
-                        buttons={modules[3].buttons}
-                        urlImage={modules[3].urlImage}
-                    />
-                </Suspense>
-                <div className="grid-2-col">
-                    <Suspense fallback={<div>Loading...</div>}>
-                        <LasyImageComponent 
-                            textColor={modules[4].items[0].textColor}
-                            title={modules[4].items[0].title}
-                            buttons={modules[4].items[0].buttons}
-                            urlImage={modules[4].items[0].urlImage}
-                        />
-                        <LasyImageComponent 
-                            textColor={modules[4].items[1].textColor}
-                            title={modules[4].items[1].title}
-                            buttons={modules[4].items[1].buttons}
-                            urlImage={modules[4].items[1].urlImage}
-                        />
-                    </Suspense>
-                </div>
-                <Suspense fallback={<div>Loading...</div>}>
-                    <LasyImageComponent 
-                        textColor={modules[2].textColor}
-                        buttons={modules[2].buttons}
-                        urlImage={modules[2].urlImage}
-                        urlLogo={modules[2].urlLogo}
-                    />
-                </Suspense>
-                <Suspense fallback={<div>Loading...</div>}>
-                    <LazyVideoComponent 
-                        urlPoster={modules[5].urlPoster}
-                        urlSource={modules[5].urlSource}
-                        title={modules[5].title}
-                        textColor={modules[5].textColor}
-                        buttons={modules[5].buttons}
-                    />
-                </Suspense>
-                <Suspense fallback={<div>Loading...</div>}>
-                    <LazyVideoComponent 
-                        urlPoster={modules[6].urlPoster}
-                        urlSource={modules[6].urlSource}
-                    />
-                </Suspense>
-                <div className="grid-2-col">
-                    <Suspense fallback={<div>Loading...</div>}>
-                        <LazyVideoComponent 
-                            urlPoster={modules[7].urlPoster}
-                            urlSource={modules[7].urlSource}
-                        />
-                    </Suspense>
-                    <Suspense fallback={<div>Loading...</div>}>
-                            <LazyGrid 
-                                items={modules[8].items}
-                            />
-                    </Suspense>
-                </div>
-                {text.data && text.data.length > 1 
-                    ? <AnimationText text={text.data[1]} /> 
-                    : null }
-            </> 
+            {modules ? modules.map(module => {
+                switch(module.type) {
+                    case "carousel": 
+                        return (
+                            <Suspense fallback={<div>Loading...</div>}>
+                                {text && text.data && text.data.length > 0  
+                                    ? <LazyImagesCarousel text={text.data[0]} items={module.items}/> 
+                                    : null}
+                            </Suspense>
+                        );
+
+                    case "image-1":
+                        return (
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <LasyImageComponent 
+                                    textColor={module.textColor}
+                                    title={module.title}
+                                    buttons={module.buttons}
+                                    urlImage={module.urlImage}
+                                /> 
+                            </Suspense>
+                        );
+
+                    case "image-2":
+                        return(
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <LasyImageComponent 
+                                    textColor={module.textColor}
+                                    buttons={module.buttons}
+                                    urlImage={module.urlImage}
+                                    urlLogo={module.urlLogo}
+                                />
+                            </Suspense>
+                        );
+
+                    case "image-3":
+                        return (
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <LasyImageComponent 
+                                    textColor={module.textColor}
+                                    title={module.title}
+                                    buttons={module.buttons}
+                                    urlImage={module.urlImage}
+                                />
+                            </Suspense>
+                        );
+
+                    case "grid-2-col-A":
+                        return (
+                            <div className="grid-2-col">
+                                <Suspense fallback={<div>Loading...</div>}>
+                                    {module.items.map(item => 
+                                        <LasyImageComponent 
+                                            textColor={item.textColor}
+                                            title={item.title}
+                                            buttons={item.buttons}
+                                            urlImage={item.urlImage}
+                                        />
+                                        )}
+                                </Suspense>
+                            </div>
+                        );
+
+                    case "video-1":
+                        return(
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <LazyVideoComponent 
+                                    urlPoster={module.urlPoster}
+                                    urlSource={module.urlSource}
+                                    title={module.title}
+                                    textColor={module.textColor}
+                                    buttons={module.buttons}
+                                />
+                            </Suspense>
+                        );
+
+                    case "video-2":
+                        return(
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <LazyVideoComponent 
+                                    urlPoster={module.urlPoster}
+                                    urlSource={module.urlSource}
+                                />
+                            </Suspense>
+                        );
+
+                    case "stradishoppers-in-grid-2-col-B":
+                        return(
+                            <div className="grid-2-col">
+                                <Suspense fallback={<div>Loading...</div>}>
+                                    <LazyVideoComponent 
+                                        urlPoster={module.video.urlPoster}
+                                        urlSource={module.video.urlSource}
+                                    />
+                                </Suspense>
+                                <Suspense fallback={<div>Loading...</div>}>
+                                        <LazyGrid 
+                                            items={module.items}
+                                        />
+                                </Suspense>
+                            </div>
+                        );
+
+                    default:
+                        return(null);
+                    
+                }
+            })
             : null}
+            {text.data && text.data.length > 1 
+                ? <AnimationText text={text.data[1]} /> 
+                : null }
         </>
     );
 };
