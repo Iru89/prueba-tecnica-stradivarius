@@ -30,33 +30,70 @@
     font-size: 5.5vw;
 }
 
-.title span::before {
-    content: "30%";
-    animation: percentage 3s linear infinite;
+
+.absolute {
+    position: absolute;
 }
-@keyframes percentage {
+
+.wrapper-animation {
+    width: 50%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.percentatge-1 {
+    animation: a-percentage-1 3s infinite;
+}
+@keyframes a-percentage-1 {
     0% {
-        content: "30%";
+        opacity: 0;
     }
-    50% {
-        content: "40%";
+    33% {
+        opacity: 1;
     }
-    100% {
-        content: "50%";
+    66% {
+        opacity: 0;
+    }
+    99% {
+        opacity: 0;
     }
 }
 
-/* @-webkit-keyframes percentage {
+.percentatge-2 {
+    animation: a-percentage-2 3s infinite;
+}
+@keyframes a-percentage-2 {
     0% {
-        content: "30%";
+        opacity: 0;
     }
-    50% {
-        content: "40%";
+    33% {
+        opacity: 0;
     }
-    100% {
-        content: "50%";
+    66% {
+        opacity: 1;
     }
-}*/
+    99% {
+        opacity: 0;
+    }
+}
+
+.percentatge-3 {
+    animation: a-percentage-3 3s infinite;
+}
+@keyframes a-percentage-3 {
+    0% {
+        opacity: 0;
+    }
+    33% {
+        opacity: 0;
+    }
+    66% {
+        opacity: 0;
+    }
+    99% {
+        opacity: 1;
+    }
+}
 
 .text-button {
     cursor: pointer;
@@ -150,6 +187,18 @@
     width: 50%;
     display: flex;
     justify-content: space-evenly;
+    position: absolute;
+    top: 22vh
+}
+@media (max-width: 769px) {
+    .wrapper-buttons {
+        top: 15vh
+    }
+}
+@media (max-width: 375px) {
+    .wrapper-buttons {
+        top: 8vh
+    }
 }
 
 .lazy {

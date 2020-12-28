@@ -4,6 +4,7 @@ import { useNearScreen } from "../../utils/core";
 import "./css/Main.css";
 
 export const ImageComponent = ({textColor, title, buttons, urlImage, urlLogo, percentatge}) => {
+    console.log(percentatge)
     return (
         <>
             <div className="position-relative">
@@ -13,16 +14,24 @@ export const ImageComponent = ({textColor, title, buttons, urlImage, urlLogo, pe
                             {title ? title : null }
                         </div>
                         {urlLogo ? <div className="image-logo"> <img src={urlLogo} alt="" /></div> : null}
-                        {percentatge ? <div  className="title">-<span></span></div> : null}
-                        {buttons && buttons.length > 0  
-                        ? <div className="wrapper-buttons">
-                            {buttons.map(button => 
-                                <div key={button.text} className="text-button">
-                                    <a href={button.url} target="_blank" rel="noopener noreferrer">{button.text}</a>
-                                </div>
-                            )} 
-                        </div> 
-                        : null}          
+                        <div className="relative wrapper">
+                            {percentatge
+                            ? <div  className="title wrapper-animation">
+                                {percentatge.length > 0 && percentatge.map((item, index) => 
+                                    <span className={`percentatge-${index+1} absolute`}>-{item}%</span>
+                                )}
+                            </div> 
+                            : null}
+                            {buttons && buttons.length > 0  
+                            ? <div className="wrapper-buttons">
+                                {buttons.map(button => 
+                                    <div key={button.text} className="text-button">
+                                        <a href={button.url} target="_blank" rel="noopener noreferrer">{button.text}</a>
+                                    </div>
+                                )} 
+                            </div> 
+                            : null}
+                        </div>     
                     </div>
                 </div>
                 <img src={urlImage} alt="" className="image"/>

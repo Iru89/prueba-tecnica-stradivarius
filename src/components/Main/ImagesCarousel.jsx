@@ -38,7 +38,7 @@ const LazyImagesCarousel = ({text, items}) => {
                     {items.map(item => <ImageComponent 
                         textColor={item.textColor} 
                         title={item.title} 
-                        percentatge={item.percentatge && items[0].percentatge.length > 0 ? true : false} 
+                        percentatge={item.percentatge} 
                         buttons={item.buttons} 
                         urlImage={item.urlImage} 
                     />)}
