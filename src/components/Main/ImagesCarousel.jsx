@@ -42,20 +42,6 @@ const LazyImagesCarousel = ({text, items}) => {
                         buttons={item.buttons} 
                         urlImage={item.urlImage} 
                     />)}
-                    {/* <ImageComponent 
-                        textColor={items[0].textColor} 
-                        title={items[0].title} 
-                        percentatge={items[0].percentatge && items[0].percentatge.length > 0 ? true : false} 
-                        buttons={items[0].buttons} 
-                        urlImage={items[0].urlImage} 
-                    />
-                    <ImageComponent 
-                        textColor={items[1].textColor} 
-                        title={items[1].title}
-                        percentatge={items[1].percentatge && items[1].percentatge.length > 0 ? true : false}  
-                        buttons={items[1].buttons} 
-                        urlImage={items[1].urlImage} 
-                    /> */}
                 </ImagesCarousel>
                 <AnimationText text={text} />
             </>
